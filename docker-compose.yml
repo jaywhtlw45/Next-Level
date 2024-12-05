@@ -1,4 +1,4 @@
-version: "3.8"
+# version: "3.9"
 
 services:
   backend:
@@ -11,25 +11,25 @@ services:
       - ./backend:/app  # Mount the backend folder as a volume inside the container
     environment:
       - ENV=development  # Pass environment variables to the container
-    # networks:
-    #   - app-network  # Connect to a network
+    networks:
+      - app-network  # Connect to a network
 
-  # frontend:
-  #   build:
-  #     context: ./frontend  # The directory to build the Docker image for frontend
-  #     dockerfile: Dockerfile  # Dockerfile for the frontend
-  #   ports:
-  #     - "3000:3000"  # Map port 3000 for frontend (React app) to your machine
-  #   volumes:
-  #     - ./frontend:/app  # Mount the frontend folder as a volume inside the container
-  #   environment:
-  #     - REACT_APP_API_URL=http://backend:8000  # API URL for frontend to access backend
-    # networks:
-    #   - app-network  # Connect to the same network as the backend
+  frontend:
+    build:
+      context: ./frontend  # The directory to build the Docker image for frontend
+      dockerfile: Dockerfile  # Dockerfile for the frontend
+    ports:
+      - "3000:3000"  # Map port 3000 for frontend (React app) to your machine
+    volumes:
+      - ./frontend:/app  # Mount the frontend folder as a volume inside the container
+    environment:
+      - REACT_APP_API_URL=http://backend:8000  # API URL for frontend to access backend
+    networks:
+      - app-network  # Connect to the same network as the backend
 
-# networks:
-#   app-network:  # Define the custom network shared between backend and frontend
-#     driver: bridge  # Use the default Docker bridge driver
+networks:
+  app-network:  # Define the custom network shared between backend and frontend
+    driver: bridge  # Use the default Docker bridge driver
 
 
 #! Remember, you can create a custom network and separate out the 2 yaml files. This will likely be needed

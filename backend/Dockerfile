@@ -5,4 +5,4 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 # app.py is entry point
-CMD ["python", "app.py"]
+CMD ["python", "src/app.py"]

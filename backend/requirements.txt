@@ -1,2 +1,1 @@
-# file needs to contain all requirements for docker container
-# flask ,requests et
+Flask
